@@ -1,0 +1,42 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.alert {
+    opacity: 1;
+    visibility: visible;
+    transition: opacity 0.25s, visibility 0.25s;
+    position: fixed;
+    width: 100%;
+}
+.alert[data-alert-show="false"] {
+    opacity: 0;
+    visibility: hidden;
+}
+.alert {
+    opacity: 1;
+    visibility: visible;
+}
+
+.inputDiv {
+    @apply col-span-6
+}
+.inputSmallDiv {
+    @apply col-span-6 sm:col-span-3
+}
+.input {
+    @apply mt-1 w-full rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm
+}
+.label {
+    @apply block text-sm font-medium text-gray-700
+}
+.primaryButton {
+    @apply inline-block shrink-0 rounded-md border border-teal-600 bg-teal-600 px-12 py-3 text-sm font-medium text-white transition hover:bg-transparent hover:text-teal-600 focus:outline-none focus:ring active:text-teal-500
+}
+.secondaryButton {
+    @apply inline-block rounded border border-teal-600 px-12 py-3 text-sm font-medium text-teal-600 hover:bg-teal-600 hover:text-white focus:outline-none focus:ring active:bg-teal-500
+}
+
+fieldset > div > * {
+    transition: all 0.5s ease-in;
+}
