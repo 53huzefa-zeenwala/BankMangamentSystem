@@ -12,6 +12,7 @@ export const StateContext = ({ children }) => {
     async function isUserAvailable() {
         try {
             const isUser = await axios.get("http://localhost:8000/api/user/isAvailable", { withCredentials: true })
+            console.log(isUser, isUser.data);
             if (isUser.data === true) {
                 setUserAvailable(true)
             } else {

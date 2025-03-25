@@ -1,30 +1,31 @@
-import mysql from "mysql";
+import mysql from "mysql2";
 import bcrypt, { compareSync } from "bcrypt";
 import jwt from "jsonwebtoken";
 
 export const db = mysql.createConnection({
-  host: 'localhost',
-    user: 'root',
-    password: '30451772',
-  database: "Bank_managment",
+  host: "sql.freedb.tech",
+  user: "freedb_huzefa",
+  password: "%vKB#&#rqAkA6@x",
+  port: 3306,
+  database: "freedb_bank_managment",
 });
 
 export const JWT_TOKEN_KEY = "SubscribeToWebDevHuzefa";
 
-export function encryptPassword (password) {
+export function encryptPassword(password) {
   const salt = bcrypt.genSaltSync(10);
   const hash = bcrypt.hashSync(password, salt);
   return hash;
-};
-export function decodePassword (userPassword, serverPassword) {
+}
+export function decodePassword(userPassword, serverPassword) {
   const isPasswordCorrect = compareSync(userPassword, serverPassword);
   return isPasswordCorrect;
-};
+}
 
-export function createToken (userId, accountId) {
+export function createToken(userId, accountId) {
   const token = jwt.sign({ id: userId, accountId }, JWT_TOKEN_KEY);
   return token;
-};
+}
 
 export function updateAccountBalance(
   initialType,
