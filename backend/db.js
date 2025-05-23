@@ -9,7 +9,6 @@ export const db = mysql.createConnection({
   port: 3306,
   database: "freedb_bank_managment",
 });
-
 export const JWT_TOKEN_KEY = "SubscribeToWebDevHuzefa";
 
 export function encryptPassword(password) {
@@ -21,12 +20,10 @@ export function decodePassword(userPassword, serverPassword) {
   const isPasswordCorrect = compareSync(userPassword, serverPassword);
   return isPasswordCorrect;
 }
-
 export function createToken(userId, accountId) {
   const token = jwt.sign({ id: userId, accountId }, JWT_TOKEN_KEY);
   return token;
 }
-
 export function updateAccountBalance(
   initialType,
   type,

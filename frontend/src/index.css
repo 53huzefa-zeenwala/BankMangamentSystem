@@ -1,7 +1,6 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
 .alert {
     opacity: 1;
     visibility: visible;
@@ -17,7 +16,6 @@
     opacity: 1;
     visibility: visible;
 }
-
 .inputDiv {
     @apply col-span-6
 }

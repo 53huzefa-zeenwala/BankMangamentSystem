@@ -1,49 +1,70 @@
-import axios from 'axios'
-import React, { useEffect, useState } from 'react'
-import { useNavigate, useSearchParams } from 'react-router-dom'
-import { Steps } from '../components'
-import { useStateContext } from '../context/stateContext'
-
+import axios from "axios";
+import React, { useEffect, useState } from "react";
+import { useNavigate, useSearchParams } from "react-router-dom";
+import { Steps } from "../components";
+import { useStateContext } from "../context/stateContext";
 export default function CreateAccount() {
-  const { setAlert, setCurrentUser, currentUser, userAvailable } = useStateContext()
-
+  const { setAlert, setCurrentUser, currentUser, userAvailable } =
+    useStateContext();
   const [inputs, setInputs] = useState({
     initialBalance: 0,
     accountName: "",
     password: "",
-    confirmPassword: ""
-  })
+    confirmPassword: "",
+  });
   const handleChange = (e) => {
-    setInputs(prev => ({ ...prev, [e.target.name]: e.target.value }))
-  }
-  const navigate = useNavigate()
-  const [searchParam, getSearchParam] = useSearchParams()
+    setInputs((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+  };
+  const navigate = useNavigate();
+  const [searchParam, getSearchParam] = useSearchParams();
   async function onSubmit(e) {
-    e.preventDefault()
-    const { initialBalance, accountName, password, confirmPassword } = inputs
-    if (initialBalance.length === 0 || accountName.length === 0 || password.length === 0 || confirmPassword.length === 0) {
-      return setAlert({ isShow: true, message: "Fill all the inputs", duration: 3000, type: "error" })
+    e.preventDefault();
+    const { initialBalance, accountName, password, confirmPassword } = inputs;
+    if (
+      initialBalance.length === 0 ||
+      accountName.length === 0 ||
+      password.length === 0 ||
+      confirmPassword.length === 0
+    ) {
+      return setAlert({
+        isShow: true,
+        message: "Fill all the inputs",
+        duration: 3000,
+        type: "error",
+      });
     }
     try {
-      const account = await axios.post("http://localhost:8000/api/account/add", { ...inputs, initialBalance: parseInt(inputs.initialBalance) }, { withCredentials: true })
-      setCurrentUser({ ...currentUser, accountId: account.data.accountId })
-      navigate('/createtransaction?redirected=true')
+      const account = await axios.post(
+        "http://localhost:8000/api/account/add",
+        { ...inputs, initialBalance: parseInt(inputs.initialBalance) },
+        { withCredentials: true }
+      );
+      setCurrentUser({ ...currentUser, accountId: account.data.accountId });
+      navigate("/createtransaction?redirected=true");
     } catch (error) {
-      setAlert({ isShow: true, message: error.message, duration: 3000, type: "error" })
-      console.log(error)
+      setAlert({
+        isShow: true,
+        message: error.message,
+        duration: 3000,
+        type: "error",
+      });
+      console.log(error);
     }
   }
-
   useEffect(() => {
     if (userAvailable === false || !currentUser) {
-      setAlert({ isShow: true, message: "User not found", duration: 3000, type: "error" })
-      navigate("/login")
+      setAlert({
+        isShow: true,
+        message: "User not found",
+        duration: 3000,
+        type: "error",
+      });
+      navigate("/login");
     }
-  }, [userAvailable, currentUser])
-
+  }, [userAvailable, currentUser]);
   return (
     <section className="bg-white">
-      {searchParam.get('redirected') && <Steps progress={1} />}
+      {searchParam.get("redirected") && <Steps progress={1} />}
       <div className="lg:grid lg:min-h-screen lg:grid-cols-12">
         <aside className="relative block h-16 lg:order-last lg:col-span-5 lg:h-full xl:col-span-6 te">
           <img
@@ -63,17 +84,14 @@ export default function CreateAccount() {
             </h1>
 
             <p className="mt-4 leading-relaxed text-gray-500">
-              Unlock a world of limitless possibilities by creating an account today and discovering all the amazing benefits that come with it!
+              Unlock a world of limitless possibilities by creating an account
+              today and discovering all the amazing benefits that come with it!
             </p>
             <form onSubmit={onSubmit} className="mt-8 grid grid-cols-6 gap-6">
               <div className="inputSmallDiv">
-                <label
-                  htmlFor="accountName"
-                  className="label"
-                >
+                <label htmlFor="accountName" className="label">
                   Account Name
                 </label>
-
                 <input
                   onChange={handleChange}
                   required
@@ -83,15 +101,10 @@ export default function CreateAccount() {
                   className="input"
                 />
               </div>
-
               <div className="inputSmallDiv">
-                <label
-                  htmlFor="initialBalance"
-                  className="label"
-                >
+                <label htmlFor="initialBalance" className="label">
                   Current Balance
                 </label>
-
                 <input
                   onChange={handleChange}
                   required
@@ -101,15 +114,10 @@ export default function CreateAccount() {
                   className="input"
                 />
               </div>
-
               <div className="inputSmallDiv">
-                <label
-                  htmlFor="Password"
-                  className="label"
-                >
+                <label htmlFor="Password" className="label">
                   Password
                 </label>
-
                 <input
                   onChange={handleChange}
                   required
@@ -119,15 +127,10 @@ export default function CreateAccount() {
                   className="input"
                 />
               </div>
-
               <div className="inputSmallDiv">
-                <label
-                  htmlFor="confirmPassword"
-                  className="label"
-                >
+                <label htmlFor="confirmPassword" className="label">
                   Confirm Password
                 </label>
-
                 <input
                   onChange={handleChange}
                   required
@@ -137,12 +140,10 @@ export default function CreateAccount() {
                   className="input"
                 />
               </div>
-
               <div className="col-span-6 sm:flex sm:items-center sm:gap-4">
                 <button type="submit" className="primaryButton">
                   Create an account
                 </button>
-
                 <p className="mt-4 text-sm text-gray-500 sm:mt-0">
                   Already have an account?
                   <a href="#" className="text-gray-700 underline pl-2">
@@ -156,6 +157,5 @@ export default function CreateAccount() {
         </main>
       </div>
     </section>
-
-  )
+  );
 }

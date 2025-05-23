@@ -1,13 +1,10 @@
 import axios from "axios";
 import { createContext, useContext, useEffect, useState } from "react";
-
 const Context = createContext()
-
 export const StateContext = ({ children }) => {
     const [currentUser, setCurrentUser] = useState(
         JSON.parse(localStorage.getItem("user")) || null
     );
-
     const [userAvailable, setUserAvailable] = useState(null)
     async function isUserAvailable() {
         try {
@@ -23,12 +20,10 @@ export const StateContext = ({ children }) => {
             setUserAvailable(false)
         } 
     }
-
     useEffect(() => {
         localStorage.setItem("user", JSON.stringify(currentUser));
         isUserAvailable()
     }, [currentUser]);
-
     const [alert, setAlert] = useState({ isShow: false, duration: 3000, message: "", type: "" })
     return (
         <Context.Provider value={{
@@ -42,5 +37,4 @@ export const StateContext = ({ children }) => {
         </Context.Provider>
     )
 }
-
 export const useStateContext = () => useContext(Context);
