@@ -25,7 +25,7 @@ export default function Login() {
       setCurrentUser(user.data)
       navigate('/')
     } catch (error) {
-      setAlert({ isShow: true, message: error.response.data, duration: 3000, type: "error" })
+     // setAlert({ isShow: true, message: error.response.data, duration: 3000, type: "error" })
       console.log(error)
     }
   }

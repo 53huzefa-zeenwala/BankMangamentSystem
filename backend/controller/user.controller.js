@@ -62,7 +62,7 @@ export function loginUser(req, res) {
   const { email, password } = req.body;
 
   const q =
-    "SELECT ua.id AS id, u.name AS userName, u.password as userPassword, u.id AS userId, a.account_name AS accountName, a.balance AS balance, a.id AS accountId FROM users_accounts AS ua JOIN user AS u ON ua.user_id = u.id JOIN account AS a ON ua.account_id = a.id WHERE u.email = ?";
+    "SELECT u.id AS id, u.name AS userName, u.password as userPassword, u.id AS userId, a.account_name AS accountName, a.balance AS balance, a.id AS accountId FROM users_accounts AS ua JOIN user AS u ON ua.user_id = u.id JOIN account AS a ON ua.account_id = a.id WHERE u.email = ?";
 
   db.query(q, [email], (err, data) => {
     if (err) return res.status(400).json(err);

@@ -61,7 +61,7 @@ export default function Home() {
                             : "text-red-600"
                         }`}
                       >
-                        ${transaction.amount}
+                      ₹ {transaction.amount}
                       </td>
                       <td className="py-3 px-4">{transaction.type}</td>
                       <td className="py-3 px-4">{transaction.software}</td>
@@ -92,7 +92,7 @@ export default function Home() {
                           : "text-red-600"
                       }`}
                     >
-                      ${transaction.amount}
+                      ₹ {transaction.amount}
                     </span>
                   </div>
                   <p className="text-gray-600">
